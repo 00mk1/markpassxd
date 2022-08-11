@@ -1,3 +1,4 @@
 import login
 
-login
+hash = login.login()
+#print(hash)
