@@ -1,7 +1,7 @@
 def login():
     import hashlib 
 
-    master_password_file = open('/home/mark/google-drive/2022/3TCS/Python/Password_Manager/Saved_Passwords/master_password.txt')
+    master_password_file = open('/home/mark/Desktop/Python/Password_Manager/Saved_Passwords/master_password/master_password.txt')
     master_password = master_password_file.read()
         
     #not blank
@@ -18,7 +18,7 @@ def login():
 
     #creates a new master password
     else:
-        master_password = open('/home/mark/google-drive/2022/3TCS/Python/Password_Manager/Saved_Passwords/master_password.txt', 'w')
+        master_password = open('/home/mark/Desktop/Python/Password_Manager/Saved_Passwords/master_password/master_password.txt', 'w')
         usr_imput = input("Enter New Master Password:\n")
         master_password.write(hashlib.sha256(usr_imput.encode('utf-8'))).hexdigest()
         master_password_file.close()

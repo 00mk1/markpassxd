@@ -27,24 +27,51 @@ def add_entry(key):
 
     pyAesCrypt.encryptFile(file_path, output, key)
     os.remove(file_path)
+    return
     
-def read_entry(key):
+def read_entry(key, mode):
+    x = 1
+
     res = []
-    dir_path = '/home/mark/Desktop/Python/Password_Manager/Saved_Passwords'
+    dir_path = '/home/mark/Desktop/Python/Password_Manager/Saved_Passwords/'
     for path in os.listdir(dir_path):
-    # check if current path is a file
+        
+        # check if current path is a file
         if os.path.isfile(os.path.join(dir_path, path)):
             res.append(path)
-    y = 0
-    for y in res:
-        n = 1
-        
-        print(str(n) + ". " + res[y] + "\n")
-        n += 1
-        y += 1
+
+    for results in res:
+        print("Saved Passwords:\n" + str(x) + ". " + results) 
+        x += 1
+    if mode == 'read':
+
+        try:
+            file_path = dir_path + res[int(input("Select File To Read:\n"))-1]
+            output = str(file_path).replace('.aes', '')
+
+            print(str(file_path))
+            pyAesCrypt.decryptFile(str(file_path), output, key)
+            sel = open(output)
+            print(sel.read())
+            os.remove(output)
+        except:
+            return
+    
+    if mode == 'delete':
+
+        try:
+            file_path = dir_path + res[int(input("Select File To Delete:\n"))-1]
+            if input("Confirm ['y' 'n']\n") == 'y':
+                os.remove(file_path)
+        except:
+            return
 
 
-    file_path = input
+
+    
+           
+
+    
 
     
 
