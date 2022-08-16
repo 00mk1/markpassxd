@@ -15,15 +15,15 @@ def generate_password():
 
     char_len = int(input("How Many Characters Should Be Included?\n"))
 
-    if input("Include Lowercase Letters? 'y' 'n'\n") == 'y':
+    if input("Include Lowercase Letters? [y][n]\n") == 'y':
         inc_lc = True
-    if input("Include Uppercase Letters? 'y' 'n'\n") == 'y':
+    if input("Include Uppercase Letters? [y][n]\n") == 'y':
         inc_uc = True
-    if input("Include Numbers? 'y' 'n'\n") == 'y':
+    if input("Include Numbers? [y][n]\n") == 'y':
         inc_n = True
-    if input("Include Symbol Characters? 'y' 'n'\n") == 'y':
+    if input("Include Symbol Characters? [y][n]\n") == 'y':
         inc_sym = True
-    if input("Include Extended Ascii Characters? (these may not work on all sites) 'y' 'n'\n"):
+    if input("Include Extended Ascii Characters? (these may not work on all sites)[y][n]\n"):
         inc_extasc = True
 
     password = []
