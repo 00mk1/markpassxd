@@ -1,5 +1,6 @@
 def generate_password():
     import random
+    import secrets
     
     #Boolean values for including these character types
     inc_lc = False
@@ -37,15 +38,15 @@ def generate_password():
     #adds random characters from the desired lists
     for x in range(char_len):
         if inc_lc == True:
-            password.append(random.choice(lower_case_letters))
+            password.append(secrets.choice(lower_case_letters))
         if inc_uc == True:
-            password.append(random.choice(upper_case_letters))
+            password.append(secrets.choice(upper_case_letters))
         if inc_n == True:
-            password.append(random.choice(numbers))
+            password.append(secrets.choice(numbers))
         if inc_sym == True:
-            password.append(random.choice(symbols))
+            password.append(secrets.choice(symbols))
         if inc_extasc == True:
-            password.append(random.choice(ext_ascii))
+            password.append(secrets.choice(ext_ascii))
         #shortens the list to the desired size
         del password[char_len:]
         #randomizes the order of the list
