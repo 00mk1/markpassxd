@@ -1,20 +1,40 @@
-def login(mode):
+#MarkPassxD - Mark Barlass 2022
 
+#Handles creating a master password, logging in and changing the master password.
+
+#mode is the operating mode of this function. It can be used in normal mode or reset [master password] mode.
+def login(mode):
+    import platform
     import hashlib 
     import os
     import pyAesCrypt
-    
-    
-    #reads the master password
-    mp_file_path = os.getcwd() + '/Password_Manager/Saved_Passwords/master_password/master_password.txt'
+
+    #gets the operating system.
+    system = platform.system()
+   
+    #windows uses "\" to seperate folders, while unix like (Mac, DSB, Linux) systems use "/".
+    if system == 'Windows':
+        mp_file_path = os.getcwd() + '\Password_Manager\Saved_Passwords\master_password\master_password.txt'
+        salt_path = os.getcwd() + '\Password_Manager\Saved_Passwords\master_password\salt.txt'
+    else:
+        mp_file_path = os.getcwd() + '/Password_Manager/Saved_Passwords/master_password/master_password.txt'
+        salt_path = os.getcwd() + '/Password_Manager/Saved_Passwords/master_password/salt.txt'
+
+    #reads the master password.
     master_password_file = open(mp_file_path)
     master_password = master_password_file.read()
-        
-    #if the master password is already set
-    if master_password != '':
-        #compares to the hashed user input
-        usr_imput = input("Enter Master Password:\n")
+    
 
+    #if the master password is already set.
+    if master_password != '':
+        #the salt is a string added to the password to make it more secure.
+        salt_file = open(salt_path)
+        salt = salt_file.read()
+        
+        #gets the user input and adds the salt value.
+        usr_imput = input("Enter Master Password:\n") + salt
+
+        #compares the hased user input with the saved password.
         if hashlib.sha256(usr_imput.encode('utf-8')).hexdigest() == master_password:  
             print("Success!")
         else:
@@ -25,16 +45,26 @@ def login(mode):
 
     #creates a new master password if none is set
     else:
+        salt_file = open(salt_path, 'w')
+        #writes a random salt to the salt file
+        salt_file.write(str(os.urandom(32)))
+        salt_file = open(salt_path, 'r')
+        salt = salt_file.read()
+
         master_password = open(mp_file_path, 'w')
-        usr_imput = input("Enter New Master Password:\n")
-        master_password.write(str(hashlib.sha256(usr_imput.encode('utf-8'))).hexdigest())
-        
+        usr_imput = input("Enter New Master Password:\n") + salt
+        #writes the new master password
+        master_password.write(hashlib.sha256(usr_imput.encode('utf-8')).hexdigest())
+    
+    salt_file.close()
+    
     #generates a key to use for file encyption
     encrypt_hash = hashlib.sha224(usr_imput.encode('utf-8')).hexdigest()
 
     if mode == 'normal':
         return encrypt_hash
 
+    #allows the user to change the master password.
     if mode == 'reset':
         new_password = str(input("Enter New Master Password:\n"))
 
@@ -43,8 +73,12 @@ def login(mode):
             key = str(hashlib.sha224(new_password.encode('utf-8')).hexdigest())
     
             res = []
-            dir_path = str(os.getcwd()) + "/Password_Manager/Saved_Passwords/"
 
+            if system == 'Windows':
+                dir_path = str(os.getcwd()) + "\Password_Manager\Saved_Passwords"
+            else:
+                dir_path = str(os.getcwd()) + "/Password_Manager/Saved_Passwords/"
+            
             #for each saved password
             for path in os.listdir(dir_path):
                 # check if current path is a file

@@ -24,7 +24,7 @@ def generate_password(char_length):
             char_len = int(input("How Many Characters Should Be Included? (More = Better, Recomended: 128)\n"))
         except:
             print("Please Enter Whole Digits\n")
-            generate_password()
+            generate_password(char_length)
             
         
     if input("Include Lowercase Letters? [y][n]\n") == 'y':
