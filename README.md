@@ -1,7 +1,7 @@
 # MarkPassxD - A Simple CLI Password Manager
 FOSS - Mark Barlass 2022, use as you wish.
 
-This program was made for the NCEA standard AS91906 and is written in python.
+This program was made for the NCEA standards AS91906 and AS91907 and is written in Python.
 While I have done my best to make this program secure, Python is incapible of low level memory management so sectors where sensitive data was stored cannot be wiped. In addition to this, I am still an amature programmer so please DO NOT use this program to store ANY sensitive information.
 
 
@@ -20,13 +20,13 @@ Passwords are encrypted using AES 256. The program requires a master password wh
 #### Dependancies 
 This program requires Python 3 as well as the following third party libraries. It will not work unless they are installed:
 
-pyAesCrypt
-Pyperclip
+'pyAesCrypt'
+'Pyperclip'
 
 These can be installed with the following commands:
 
-pip install pyperclip
-pip install pyAesCrypt
+'pip install pyperclip'
+'pip install pyAesCrypt'
 
 
 #### Method One (GitHub)
@@ -50,6 +50,6 @@ Run 'main.py'
 
 To select a option type in the corrosponding number or letter when prompted.
 When prompted you may enter 'b' to return to a previous state.
-When given a [y][n] option you may enter nothing to skip or cancel the operation. 
+When given a '[y][n]' option you may enter nothing to skip or cancel the operation. 
 
 
